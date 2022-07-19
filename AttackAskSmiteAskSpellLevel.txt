@@ -69,3 +69,5 @@
   --a|Battleaxe
 
 }}
+
+--/ this scipt can still be inmpored to remove spell slots for the selected character that uses it, just have not implemented that yet.
