@@ -69,3 +69,4 @@
   --a|Battleaxe
 
 }}
+--/ This can still be edited to check for the spell slots to use and then removed the used spell slot just has not be implemented yet!
