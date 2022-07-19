@@ -1,0 +1,63 @@
+!scriptcard {{
+  --#title|Saving Throw
+  --#titlecardbackground|#ff00d9
+  --#titleFontColor|#f5f5f5
+  --#sourceToken|@{selected|token_id}
+  --#leftsub|@{selected|character_name}
+  --#emotestate|hidden
+
+  --=SaveRoll|?{SavingThrow|Standard,1d20|Advantage,2d20kh1|Disadvantage,2d20kl1}
+  --+Dice Roll|[$SaveRoll]
+
+  
+  --=SavingType|?{Saving Throw|STR|DEX|CON|INT|WIS|CHA}
+
+  --?[$SavingType.Text] -eq STR|StrSave
+  --?[$SavingType.Text] -eq DEX|DexSave
+  --?[$SavingType.Text] -eq CON|ConSave
+  --?[$SavingType.Text] -eq INT|IntSave
+  --?[$SavingType.Text] -eq WIS|WisSave
+  --?[$SavingType.Text] -eq CHA|ChaSave
+
+  --:StrSave|
+  --=SavingThrow|[$SaveRoll] + @{selected|strength_save_bonus}
+  --+Total|[$SavingThrow] Strength Save
+  --X|
+
+  --:DexSave|
+  --=SavingThrow|[$SaveRoll] + @{selected|dexterity_save_bonus}
+  --+Total|[$SavingThrow] Dexterity Save
+  --X|
+
+  --:ConSave|
+  --=SavingThrow|[$SaveRoll] + @{selected|constitution_save_bonus}
+  --+Total|[$SavingThrow] Constitution Save
+  --X|
+
+  --:IntSave|
+  --=SavingThrow|[$SaveRoll] + @{selected|intelligence_save_bonus}
+  --+Total|[$SavingThrow] Intelligence Save
+  --X|
+
+  --:WisSave|
+  --=SavingThrow|[$SaveRoll] + @{selected|wisdom_save_bonus}
+  --+Total|[$SavingThrow] Wisdom Save
+  --X|
+
+  --:ChaSave|
+  --=SavingThrow|[$SaveRoll] + @{selected|charisma_save_bonus}
+  --+Total|[$SavingThrow] Charisma Save
+  --X|
+}}
+
+
+  --=SavingThrow|?{Saving Throw|
+STR,Strength Save:[$SaveRoll] + @{selected|strength_save_bonus}|
+DEX,Dexterity Save:[[1d20 + @{selected|dexterity_save_bonus}]]|
+CON,Constitution Save:[[1d20 + @{selected|constitution_save_bonus}]]|
+INT,Intelligence Save:[[1d20 + @{selected|intelligence_save_bonus}]]|
+WIS,Wisdom Save:[[1d20 + @{selected|wisdom_save_bonus}|
+CHA,Charisma Save:[[1d20 + @{selected|charisma_save_bonus}]]}
+
+  --+Rolled|[$SavingThrow.Text]
+}}

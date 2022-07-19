@@ -1,0 +1,61 @@
+!scriptcard {{
+  --#title|Reset Spell Slots
+  --#sourceToken|@{selected|token_id}
+  --#leftsub|@{selected|character_name}
+  --#emotestate|hidden
+
+
+  --=SlotsTotal1|[*S:lvl1_slots_total]  
+  --=SlotsTotal2|[*S:lvl2_slots_total]
+  --=SlotsTotal3|[*S:lvl3_slots_total]  
+  --=SlotsTotal4|[*S:lvl4_slots_total]
+  --=SlotsTotal5|[*S:lvl5_slots_total]  
+  --=SlotsTotal6|[*S:lvl6_slots_total]
+  --=SlotsTotal7|[*S:lvl7_slots_total]  
+  --=SlotsTotal8|[*S:lvl8_slots_total]
+  --=SlotsTotal9|[*S:lvl9_slots_total]
+
+  --=MaxHP|[*S:hp^]
+  --=CurrentHP|[*S:hp]
+  --=RestoreHP|[$MaxHP] - [$CurrentHP]
+  --@alter|_target|@{selected|token_id} _bar|1 _amount|[$RestoreHP]
+  --+Restored|[$RestoreHP] HP
+
+  --@setattr|_charid [*S:character_id] _hit_dice|@{selected|hit_dice|max} _silent
+  --+Hit Dice Restored To:|@{selected|hit_dice|max}
+
+  --@setattr|_charid [*S:character_id] _lvl1_slots_expended|[$SlotsTotal1.Total] _silent
+  --@setattr|_charid [*S:character_id] _lvl2_slots_expended|[$SlotsTotal2.Total] _silent
+  --@setattr|_charid [*S:character_id] _lvl3_slots_expended|[$SlotsTotal3.Total] _silent
+  --@setattr|_charid [*S:character_id] _lvl4_slots_expended|[$SlotsTotal4.Total] _silent
+  --@setattr|_charid [*S:character_id] _lvl5_slots_expended|[$SlotsTotal5.Total] _silent
+  --@setattr|_charid [*S:character_id] _lvl6_slots_expended|[$SlotsTotal6.Total] _silent
+  --@setattr|_charid [*S:character_id] _lvl7_slots_expended|[$SlotsTotal7.Total] _silent
+  --@setattr|_charid [*S:character_id] _lvl8_slots_expended|[$SlotsTotal8.Total] _silent
+  --@setattr|_charid [*S:character_id] _lvl9_slots_expended|[$SlotsTotal9.Total] _silent
+
+  --=RemainingCharges|@{repeating_resource_$0_resource_right}
+  --=MaxCharges|7
+  --=RegainedCharges| 1d6+1 + @{repeating_resource_$0_resource_right}  
+  --=TotalCharges|[$RegainedCharges] + [$RemainingCharges]
+
+  --=MaxLayOnHands|@{selected|level}*5
+  --@setattr|_silent _charid [*S:character_id] _class_resource|[$MaxLayOnHands]
+  --+Lay on Hands| Restored!
+
+  --=MaxArrows|20
+  --@setattr|_silent _charid [*S:character_id] _other_resource|[$MaxArrows]
+  --+Test Arrows| Restored! 
+
+--?[$TotalCharges] -ge [$MaxCharges]|[
+	 --@setattr|_silent _charid @{character_id} _repeating_resource_$0_resource_right|[$MaxCharges]
+	--+Charges Restored| to Max!
+--]|[
+	--@modattr|_silent _charid @{character_id} _repeating_resource_$0_resource_right|[$RegainedCharges]
+	--+Charges Restored|[$RegainedCharges]
+--]|
+
+  --+|[b]All expended spell slots reset.[/b]
+
+
+}}

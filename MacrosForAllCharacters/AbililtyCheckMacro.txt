@@ -1,0 +1,45 @@
+!scriptcard {{
+  --#title|Skill Check
+  --#sourceToken|@{selected|token_id}
+  --#emotestate|hidden
+
+  --=SkillCheck|?{Skill Check|
+Acrobatics,Acrobatics Check:[[1d20 + @{selected|Acrobatics_bonus}]]|
+Animal Handling,Animal Handling Check:[[1d20 + @{selected|animal_handling_bonus}]]|
+Arcana,Arcana Check:[[1d20 + @{selected|arcana_bonus}]]|
+Athletics,Athletics Check:[[1d20 + @{selected|athletics_bonus}]]|
+Deception,Deception Check:[[1d20 + @{selected|deception_bonus}]]|
+History,History Check:[[1d20 + @{selected|history_bonus}]]|
+Insight,Insight Check:[[1d20 + @{selected|insight_bonus}]]|
+Intimidation,Intimidation Check:[[1d20 + @{selected|intimidation_bonus}]]|
+Medicine,Medicine Check:[[1d20 + @{selected|medicine_bonus}]]|
+Nature,Nature Check:[[1d20 + @{selected|nature_bonus}]]|
+Perception,Perception Check:[[1d20 + @{selected|perception_bonus}]]|
+Performance,Performance Check:[[1d20 + @{selected|performance_bonus}]]|
+Persuasion,Persuasion Check:[[1d20 + @{selected|persuasion_bonus}]]|
+Religion,Religion Check:[[1d20 + @{selected|religion_bonus}]]|
+Sleight Of Hand,Sleight Of Hand Check:[[1d20 + @{selected|sleight_of_hand_bonus}]]|
+Stealth,Stealth Check:[[1d20 + @{selected|stealth_bonus}]]|
+Survival,Survival Check:[[1d20 + @{selected|survival_bonus}]]
+}
+
+  --+Rolled|[$SkillCheck.Text] 
+  --+Dice|1d20 + @{selected|Acrobatics_bonus}
+  --+Dice|1d20 + @{selected|animal_handling_bonus}
+  --+Dice|1d20 + @{selected|arcana_bonus}
+  --+Dice|1d20 + @{selected|athletics_bonus}
+  --+Dice|1d20 + @{selected|deception_bonus}
+  --+Dice|1d20 + @{selected|history_bonus}
+  --+Dice|1d20 + @{selected|insight_bonus}
+  --+Dice|1d20 + @{selected|intimidation_bonus}
+  --+Dice|1d20 + @{selected|medicine_bonus}
+  --+Dice|1d20 + @{selected|nature_bonus}
+  --+Dice|1d20 + @{selected|perception_bonus}
+  --+Dice|1d20 + @{selected|performance_bonus}
+  --+Dice|1d20 + @{selected|persuasion_bonus}
+  --+Dice|1d20 + @{selected|religion_bonus}
+  --+Dice|1d20 + @{selected|sleight_of_hand_bonus}
+  --+Dice|1d20 + @{selected|stealth_bonus}
+  --+Dice|1d20 + @{selected|survival_bonus}
+
+}}

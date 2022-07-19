@@ -1,0 +1,13 @@
+!scriptcard {{
+  --#title|Bardic Inspiration
+  --#titlecardbackground|#078a03
+  --#titleFontColor|#fafafa
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+  --#leftsub|@{selected|character_name}
+  --#emotestate|hidden
+
+  --+@{target|character_name}|Gains 1D6 Bardic Inspiration
+  --@token-mod|_set statusmarkers|all-for-one _ids @{target|token_id}
+
+}}

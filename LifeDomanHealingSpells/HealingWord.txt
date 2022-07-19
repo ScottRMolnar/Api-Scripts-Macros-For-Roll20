@@ -1,0 +1,51 @@
+!scriptcard  {{
+  --#title|Healing Word
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+
+  -->GetAndCheckSlotInformation|
+  
+  --?@{selected|level} -ge 6|--=BlessedHeal|2 + [$SlotLevel]
+  --?@{selected|level} -lt 6|--=BlessedHeal|0
+
+  --=Heal|[$SlotLevel]d4 [Level] + @{selected|pb} [PB] + 2 + [$SlotLevel] [SLB]
+  --#leftsub|Slot level [$SlotLevel]
+  --#rightsub|Range 60 feet
+  --#emoteText|@{selected|token_name} Casts Level [$SlotLevel] Cure Wounds on @{target|token_name}
+  --+Heals For|[$Heal]
+  --+Blessed Heal|@{selected|token_name} heals for [$BlessedHeal] [i](Active after your level 6)[/i]
+  -->DeductSpellSlot|
+  --#rightsub|Level [$SlotLevel] Left: [$SlotsRemaining] 
+  -->PlayEffects|none;bubbling-holy;beam-holy;Cure
+  -->ApplyHealAlterBars|@{target|token_id};1;[$Heal];@{selected|token_id};[$BlessedHeal]
+  --X|
+
+  --:GetAndCheckSlotInformation|
+  --=SlotLevel|?{Spell Slot Level?|1|2|3|4|5|6|7|8|9}
+  --=SlotsTotal|[*S:lvl[$SlotLevel]_slots_total]
+  --=SlotsExpended|[*S:lvl[$SlotLevel]_slots_expended]
+  --?[$SlotsExpended.Total] -eq 0|NoSlotsLeft
+  --<|
+
+  --:NoSlotsLeft|
+  --+|[*S:character_name] has no level [$SlotLevel.Total] spell slots available.
+  --X|
+
+  --:DeductSpellSlot|
+  --=SlotsExpended|[$SlotsExpended] - 1
+  --@setattr|_charid [*S:character_id] _lvl[$SlotLevel]_slots_expended|[$SlotsExpended] _silent
+  --=SlotsRemaining|[$SlotsExpended]
+  --<|
+
+  --:PlayEffects|Parameters are : source effect; target effect; line effect; sound effect
+  --vtoken|@{selected|token_id} [%1%]
+  --vtoken|@{target|token_id} [%2%]
+  --vbetweentokens|@{selected|token_id} @{target|token_id} [%3%]
+  --@roll20AM|_audio,play,nomenu|[%4%]
+  --<|
+
+  --:ApplyHealAlterBars|
+  --@alter|_target|[%1%] _bar|[%2%] _amount|[%3%]
+  --@alter|_target|[%4%] _bar|[%2%] _amount|[%5%]
+
+}}

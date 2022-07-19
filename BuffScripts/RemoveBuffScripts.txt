@@ -1,0 +1,18 @@
+*************************Use and Remove Bardic Inspiration Script***************************
+!scriptcard {{
+  --#title|Bardic Inspiration
+  --#sourceToken|@{selected|token_id}
+  --#leftsub|@{selected|character_name}
+  --#emotestate|hidden
+
+  --=Dice|1d6
+  --+@{selected|character_name}|Has used their Bardic Inspiration to add [$Dice] to their roll
+  --@token-mod|_set statusmarkers|!all-for-one _ids @{selected|token_id}
+
+}}
+
+**************************Remove Bless Macro**************************************
+!setattr --sel --repeating_savemod_$0_global_save_active_flag|0
+!setattr --sel --repeating_tohitmod_$0_global_attack_active_flag|0
+
+**************************************************************************

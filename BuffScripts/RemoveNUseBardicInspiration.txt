@@ -1,0 +1,11 @@
+!scriptcard {{
+  --#title|Bardic Inspiration
+  --#sourceToken|@{selected|token_id}
+  --#leftsub|@{selected|character_name}
+  --#emotestate|hidden
+
+  --=Dice|1d6
+  --+@{selected|character_name}|Has used their Bardic Inspiration to add [$Dice] to their roll
+  --@token-mod|_set statusmarkers|!all-for-one _ids @{selected|token_id}
+
+}}

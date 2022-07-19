@@ -1,0 +1,16 @@
+!scriptcard {{
+  --#title|Bless
+  --#titlecardbackground|#fff300
+  --#titleFontColor|#fafafa
+  --#subtitleFontColor|#080700
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+  --#leftsub|@{selected|character_name}
+  --#emotestate|hidden
+
+  --+@{target|character_name}|Is Blessed
+  --@setattr|_charid [*S:character_id] _repeating_savemod_$0_global_save_active_flag|1 _silent
+  --@setattr|_charid [*S:character_id] _repeating_tohitmod_$0_global_attack_active_flag|1 _silent
+
+
+}}

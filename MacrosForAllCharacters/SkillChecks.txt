@@ -1,0 +1,160 @@
+!scriptcard {{
+  --#title|Skill Check
+  --#titlecardbackground|#42f56f
+  --#titleFontColor|#f5f5f5
+  --#subtitleFontColor|#000000
+  --#sourceToken|@{selected|token_id}
+  --#leftsub|@{selected|character_name}
+  --#emotestate|hidden
+
+  --=SkillRoll|?{SavingThrow|Standard,1d20|Advantage,2d20kh1|Disadvantage,2d20kl1}
+  --+Dice Roll|[$SkillRoll]
+
+  --=SkillType|?{Skill Check|STR|DEX|CON|INT|WIS|CHA|Acrobatics|Animal Handling|Arcana|Athletics|Deception|History|Insight|Intimidation|Investigation|Medicine|Nature|Perception|Performance|Persuasion|Religion|Sleight Of Hand|Stealth|Survival}
+
+  --?[$SkillType.Text] -eq STR|StrSave
+  --?[$SkillType.Text] -eq DEX|DexSave
+  --?[$SkillType.Text] -eq CON|ConSave
+  --?[$SkillType.Text] -eq INT|IntSave
+  --?[$SkillType.Text] -eq WIS|WisSave
+  --?[$SkillType.Text] -eq CHA|ChaSave
+  --?[$SkillType.Text] -eq Acrobatics|Acrobatics
+  --?[$SkillType.Text] -eq Animal Handling|Animal Handling
+  --?[$SkillType.Text] -eq Arcana|Arcana
+  --?[$SkillType.Text] -eq Athletics|Athletics
+  --?[$SkillType.Text] -eq Deception|Deception
+  --?[$SkillType.Text] -eq History|History
+  --?[$SkillType.Text] -eq Insight|Insight
+  --?[$SkillType.Text] -eq Intimidation|Intimidation
+  --?[$SkillType.Text] -eq Investigation|Investigation
+  --?[$SkillType.Text] -eq Medicine|Medicine
+  --?[$SkillType.Text] -eq Nature|Nature
+  --?[$SkillType.Text] -eq Perception|Perception
+  --?[$SkillType.Text] -eq Performance|Performance
+  --?[$SkillType.Text] -eq Persuasion|Persuasion
+  --?[$SkillType.Text] -eq Religion|Religion
+  --?[$SkillType.Text] -eq Sleight Of Hand|Sleight Of Hand
+  --?[$SkillType.Text] -eq Stealth|Stealth
+  --?[$SkillType.Text] -eq Survival|Survival
+
+  --:Acrobatics|
+  --=SkillCheck|[$SkillRoll] + @{selected|acrobatics_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Animal Handling|
+  --=SkillCheck|[$SkillRoll] + @{selected|animal_handling_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Arcana|
+  --=SkillCheck|[$SkillRoll] + @{selected|arcana_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Athletics|
+  --=SkillCheck|[$SkillRoll] + @{selected|athletics_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Deception|
+  --=SkillCheck|[$SkillRoll] + @{selected|deception_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:History|
+  --=SkillCheck|[$SkillRoll] + @{selected|history_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Insight|
+  --=SkillCheck|[$SkillRoll] + @{selected|insight_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Intimidation|
+  --=SkillCheck|[$SkillRoll] + @{selected|intimidation_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Investigation|
+  --=SkillCheck|[$SkillRoll] + @{selected|investigation_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Medicine|
+  --=SkillCheck|[$SkillRoll] + @{selected|medicine_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Nature|
+  --=SkillCheck|[$SkillRoll] + @{selected|nature_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Perception|
+  --=SkillCheck|[$SkillRoll] + @{selected|perception_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Performance|
+  --=SkillCheck|[$SkillRoll] + @{selected|performance_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Persuasion|
+  --=SkillCheck|[$SkillRoll] + @{selected|persuasion_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Religion|
+  --=SkillCheck|[$SkillRoll] + @{selected|religion_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Sleight Of Hand|
+  --=SkillCheck|[$SkillRoll] + @{selected|sleight_of_hand_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Stealth|
+  --=SkillCheck|[$SkillRoll] + @{selected|stealth_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:Survival|
+  --=SkillCheck|[$SkillRoll] + @{selected|survival_bonus}
+  --+Total|[$SkillCheck] [$SkillType.Text] Check
+  --X|
+
+  --:StrSave|
+  --=SkillCheck|[$SkillRoll] + @{selected|strength_mod}
+  --+Total|[$SkillCheck] Strength Check
+  --X|
+
+  --:DexSave|
+  --=SkillCheck|[$SkillRoll] + @{selected|dexterity_mod}
+  --+Total|[$SkillCheck] Dexterity Check
+  --X|
+
+  --:ConSave|
+  --=SkillCheck|[$SkillRoll] + @{selected|constitution_mod}
+  --+Total|[$SkillCheck] Constitution Check
+  --X|
+
+  --:IntSave|
+  --=SkillCheck|[$SkillRoll] + @{selected|intelligence_mod}
+  --+Total|[$SkillCheck] Intelligence Check
+  --X|
+
+  --:WisSave|
+  --=SkillCheck|[$SkillRoll] + @{selected|wisdom_mod}
+  --+Total|[$SkillCheck] Wisdom Check
+  --X|
+
+  --:ChaSave|
+  --=SkillCheck|[$SkillRoll] + @{selected|charisma_mod}
+  --+Total|[$SkillCheck] Charisma Check
+  --X|
+
+}}

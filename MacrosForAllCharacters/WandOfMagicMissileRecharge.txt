@@ -1,0 +1,20 @@
+!scriptcard {{
+  --#title|Wand Recharge
+  --#sourceToken|@{selected|token_id}
+  --#leftsub|@{selected|character_name}
+
+  --=RemainingCharges|@{repeating_resource_$0_resource_right}
+  --=MaxCharges|7
+  --=RegainedCharges| 1d6+1 + @{repeating_resource_$0_resource_right}  
+  --=TotalCharges|[$RegainedCharges] + [$RemainingCharges]
+
+
+--?[$TotalCharges] -ge [$MaxCharges]|[
+	 --@setattr|_silent _charid @{character_id} _repeating_resource_$0_resource_right|[$MaxCharges]
+	--+Charges Restored| to Max!
+--]|[
+	--@modattr|_silent _charid @{character_id} _repeating_resource_$0_resource_right|[$RegainedCharges]
+	--+Charges Restored|[$RegainedCharges]
+--]|
+
+}}

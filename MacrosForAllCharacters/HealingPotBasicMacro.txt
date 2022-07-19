@@ -1,0 +1,9 @@
+&{template:default} {{name=Healing Potion}} {{
+ ?{Potion|
+ Regular, **Healing Potion Used:** [[2d4+2]]|
+ Greater, **Greater Healing Potion Used:** [[4d4+4]]|
+ Superior, **Superior Healing Potion Used:** [[8d4+8]]|
+ Supreme, **Supreme Healing Potion Used:** [[10d4+20]]
+ } 
+ HP recovered
+}} !modbattr --charid @{target|character_id} --silent --hp|$[[0]]!!!
