@@ -1,0 +1,9 @@
+!scriptcard  {{
+  --#title|Second Wind
+  --#sourceToken|@{selected|token_id}
+  --#leftsub|Self
+  --#emoteText|@{selected|token_name} Digs deep down
+  --=SecondWind|1d10 + @{selected|level}
+  --+Second Wind Heals:|[$SecondWind]
+  --@alter|_target|@{selected|token_id} _bar|1 _amount|[$SecondWind]
+}}

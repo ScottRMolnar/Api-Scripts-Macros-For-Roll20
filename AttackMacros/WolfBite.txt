@@ -1,0 +1,32 @@
+!scriptcard  {{
+  --#title|Bite
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+  --#leftsub|Melee Attack
+  --#emoteText|@{selected|token_name} Chops down on @{target|token_name} 
+  --=TargetAC|@{target|npc_ac}
+  --?[$TargetAC.Total] -gt 0|DoneWithAC
+  --=TargetAC|@{target|ac}
+  --:DoneWithAC|
+  --=AttackRoll|?{Attack|Standard,1d20|Advantage,2d20kh1|Disadvantage,2d20kl1} + 4
+  --+Attack|@{selected|token_name} rolls [$AttackRoll] to Hit @{target|token_name}.
+  --?[$AttackRoll.Base] -eq 20|Crit
+  --?[$AttackRoll.Base] -eq 1|Fumble
+
+  --:Hit|
+  --=Damage|2d4 + 2
+  --+Damage Roll!|[$Damage] Piercing damage.
+  --+Prone|Target must roll a DC 11 Strength save!
+  --^Final|
+
+  --:Fumble|
+  --+Fumble!|The attack went horribly wrong.
+  --^Final|
+
+  --:Crit|
+  --=Damage|2d4 + 2d4 [CRIT] + 2
+  --+Critical Hit!|[$Damage] Piercing damage.
+
+  --:Final|
+  --a|Bite
+}}

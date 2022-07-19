@@ -1,0 +1,42 @@
+!scriptcard  {{
+  --#title|Dagger
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+  --#leftsub|Melee/Ranged Attack
+  --#rightsub|20/60
+  --#emoteText|@{selected|token_name} attacks @{target|token_name} with their rapier
+  --=TargetAC|@{target|npc_ac}
+  --?[$TargetAC.Total] -gt 0|DoneWithAC
+  --=TargetAC|@{target|ac}
+  --:DoneWithAC|
+  --=AttackRoll|?{Attack|Standard,1d20|Advantage,2d20kh1|Disadvantage,2d20kl1} + @{selected|dexterity_mod} [DEX] + @{selected|pb} [PROF]
+  --+Attack|@{selected|token_name} rolls [$AttackRoll] to Hit @{target|token_name}.
+  --?[$AttackRoll.Base] -eq 20|Crit
+  --?[$AttackRoll.Base] -eq 1|Fumble
+
+  --:Hit|
+  --=Damage|1d4 + @{selected|dexterity_mod} [DEX]
+  --+Damage Roll!|[$Damage] Piercing damage.
+  --=SneakDice|@{selected|level}/2 {CEIL}
+  --=SneakDamage|[$SneakDice]d6
+  --+SneakDamage|[$SneakDamage] [i](if requirements met)[/i] 
+  --^Final|
+  
+  --:Fumble|
+  --+Fumble!|The attack went horribly wrong.
+  --^Final|
+
+  --:Crit|
+  --=Damage|1d4 + @{selected|dexterity_mod} [DEX] + 1d4 [CRIT]
+  --+Critical Hit!|[$Damage] Piercing damage.
+  --=SneakDice|@{selected|level}/2 {CEIL}
+  --=SneakDamage|[$SneakDice]*2
+  --=CritSneak|[$SneakDamage]d6
+  --+SneakDamage|[$SneakDamage] [i](if requirements met)[/i] 
+  --:Final|
+
+  --a|Dagger
+
+
+
+}}

@@ -1,0 +1,39 @@
+!scriptcard  {{
+  --#title|Shiny Greataxe of Chopping
+  --#titlecardbackground|#d6d925
+  --#titleFontColor|#730303
+  --#subtitleFontColor|#730303
+  --#leftsub|Melee Attack
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+  --#emoteText|@{selected|token_name} attacks @{target|token_name}
+  --=TargetAC|@{target|npc_ac}
+  --?[$TargetAC.Total] -gt 0|DoneWithAC
+  --=TargetAC|@{target|ac}
+  --:DoneWithAC|
+  --=AttackRoll|?{Attack|Standard,1d20|Advantage,2d20kh1|Disadvantage,2d20kl1} + @{selected|strength_mod} [STR] + @{selected|pb} [PROF] + 1 [Weapon] 
+  --+Attack|@{selected|token_name} rolls [$AttackRoll] to Hit @{target|token_name}.
+  --?[$AttackRoll.Base] -eq 20|Crit
+  --?[$AttackRoll.Base] -eq 1|Fumble
+
+  --:Hit|
+  --=Damage|1d8 + @{selected|strength_mod} [STR] + 1 [Weapon]
+  --+Damage Roll!|[$Damage] slashing damage.
+  --a|Battleaxe
+  --+|[sheetbutton]Smite::@{selected|token_name}::Smite[/sheetbutton][i]RESELECT YOUR TOKEN FIRST!!![/i]
+  --X|
+
+  --:Fumble|
+  --+Fumble!|The attack went horribly wrong.
+  --X|
+
+  --:Crit|
+  --=Damage|1d8 + @{selected|strength_mod} [STR] + 1d8 [CRIT] + 1 [Weapon]
+  --+Critical Hit!|[$Damage] slashing damage.
+  --a|Battleaxe
+  --+|[sheetbutton]Smite::@{selected|token_name}::Smite[/sheetbutton]
+  --X|
+
+
+}}
+

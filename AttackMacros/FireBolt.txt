@@ -1,0 +1,32 @@
+!scriptcard  {{
+  --#title|Fire Bolt
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+  --#leftsub|Ranged Spell
+  --#rightsub|120 feet
+  --#titleFontColor|#fafafa
+  --#emoteText|@{selected|token_name} throws a bolt of fire at @{target|token_name} 
+  --=TargetAC|@{target|npc_ac}
+  --?[$TargetAC.Total] -gt 0|DoneWithAC
+  --=TargetAC|@{target|ac}
+  --:DoneWithAC|
+  --=AttackRoll|?{Attack|Standard,1d20|Advantage,2d20kh1|Disadvantage,2d20kl1} + @{selected|intelligence_mod} [INT] + @{selected|pb} [PROF]
+  --+Attack|@{selected|token_name} rolls [$AttackRoll] to Hit @{target|token_name}.
+  --?[$AttackRoll.Base] -eq 20|Crit
+  --?[$AttackRoll.Base] -eq 1|Fumble
+
+  --:Hit|
+  --=Damage|1d10 
+  --+Damage Roll!|[$Damage] Fire damage
+  --^Final|
+
+  --:Fumble|
+  --+Fumble!|The attack went horribly wrong.
+  --^Final|
+
+  --:Crit|
+  --=Damage|2d10 [CRIT]
+  --+Damage Roll!|[$Damage] Fire damage 
+  --:Final|
+  --a|Blast
+}}

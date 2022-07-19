@@ -1,0 +1,44 @@
+!scriptcard  {{
+  --#title|Eldritch Blast
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+  --#leftsub|Ranged Spell
+  --#rightsub|120 feet
+  --#titlecardbackground|#423549
+  --#emoteBackground|#423549
+  --#emoteFontColor|#fafafa
+  --#titleFontColor|#fafafa
+  --#emoteText|@{selected|token_name} hurls a violet Eldritch Blast at @{target|token_name} 
+  --=TargetAC|@{target|npc_ac}
+  --?[$TargetAC.Total] -gt 0|DoneWithAC
+  --=TargetAC|@{target|ac}
+  --:DoneWithAC|
+  --=AttackRoll|?{Attack|Standard,1d20|Advantage,2d20kh1|Disadvantage,2d20kl1} + @{selected|charisma_mod} [CHA] + @{selected|pb} [PROF]
+  --+Attack|@{selected|token_name} rolls [$AttackRoll] to Hit @{target|token_name}.
+  --?[$AttackRoll.Base] -eq 20|Crit
+  --?[$AttackRoll.Base] -eq 1|Fumble
+  --=FireDamage|@{selected|pb}
+  -->PlayEffects|none;burst-charm;beam-charm;MagicMissile
+
+  --:Hit|
+  --=Damage|1d8 + @{selected|charisma_mod} [CHA]
+  --+Damage Roll!|[$Damage] Force damage + [$FireDamage] Fire damage [i](if first hit this round)[/i].
+  --^Final|
+
+  --:Fumble|
+  --+Fumble!|The attack went horribly wrong.
+  --^Final|
+
+  --:Crit|
+  --=Damage|1d8 + @{selected|charisma_mod} [CHA] + 1d8 [CRIT]
+  --+Critical Hit!|[$Damage] Force damage + [$FireDamage] Fire damage [i](if first hit this round)[/i].
+
+  --:Final|
+  
+  --:PlayEffects|Parameters are : source effect; target effect; line effect; sound effect
+  --vtoken|@{selected|token_id} [%1%]
+  --vtoken|@{target|token_id} [%2%]
+  --vbetweentokens|@{selected|token_id} @{target|token_id} [%3%]
+  --@roll20AM|_audio,play,nomenu|[%4%]
+  --<|
+}}

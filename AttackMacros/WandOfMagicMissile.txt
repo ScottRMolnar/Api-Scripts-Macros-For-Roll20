@@ -1,0 +1,53 @@
+!scriptcard {{ 
+  --#title|Wand Of Magic Missile
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+
+  -->GetAndCheckSlotInformation|
+
+  --=MissileCount|[$Charges] + 2
+  --=DisplayCount|1
+  --=MissileDamage|0
+  --#leftsub|Charges Used: [$Charges]
+  --#rightsub|Ranged Attack
+  --#emoteText|@{selected|character_name} uses [$Charges] Charges to cast a [$Charges.Total] level spell to fire [$MissileCount.Total] missiles of magical force!
+
+  --:MissileLoop|
+  -->FireMissile|
+  --=DisplayCount|[$DisplayCount] + 1
+  --?[$DisplayCount] -le [$MissileCount]|MissileLoop
+  --+Damage:|[b]@{selected|character_name}[/b] deals [$MissileDamage] Total [b]force[/b] damage to [b]@{target|token_name}[/b]
+  -->DeductChargesUsed|
+  --#rightsub|Level [$Charges] Charges Left: [$ChargesRemaining] 
+  -->PlayEffects|none;burst-smoke;beam-magic;MagicMissile
+  --X|
+
+  --:FireMissile|
+  --=ThisMissile|1d4 + 1
+  --=MissileDamage|[$MissileDamage] + [$ThisMissile]
+  --+Missile|[$DisplayCount.Total] Hits for [$ThisMissile] [b]force[/b] damage
+  --<|
+
+  --:GetAndCheckSlotInformation|
+  --=Charges|?{Charges to use?|1|2|3|4|5|6|7}
+  --=ChargesLeft|@{repeating_resource_$0_resource_right}
+  --=ChargesRemaining|[$ChargesLeft] - [$Charges]
+  --?[$ChargesLeft] -eq 0|NoSlotsLeft
+  --<|
+
+  --:NoSlotsLeft|
+  --+|[*S:character_name] has no Charges left!
+  --X|
+
+  --:DeductChargesUsed|
+  --@modattr|_silent _charid @{character_id} _repeating_resource_$0_resource_right|-[$Charges]
+  --<|
+
+  --:PlayEffects|Parameters are : source effect; target effect; line effect; sound effect
+  --vtoken|@{selected|token_id} [%1%]
+  --vtoken|@{target|token_id} [%2%]
+  --vbetweentokens|@{selected|token_id} @{target|token_id} [%3%]
+  --@roll20AM|_audio,play,nomenu|[%4%]
+  --<|
+
+}}

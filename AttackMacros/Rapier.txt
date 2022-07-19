@@ -1,0 +1,34 @@
+!scriptcard  {{
+  --#title|Rapier
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+  --#leftsub|Melee
+  --#emoteText|@{selected|token_name} attacks @{target|token_name} with their rapier
+  --=TargetAC|@{target|npc_ac}
+  --?[$TargetAC.Total] -gt 0|DoneWithAC
+  --=TargetAC|@{target|ac}
+  --:DoneWithAC|
+  --=AttackRoll|?{Attack|Standard,1d20|Advantage,2d20kh1|Disadvantage,2d20kl1} + @{selected|dexterity_mod} [DEX] + @{selected|pb} [PROF]
+  --+Attack|@{selected|token_name} rolls [$AttackRoll] to Hit @{target|token_name}.
+  --?[$AttackRoll.Base] -eq 20|Crit
+  --?[$AttackRoll.Base] -eq 1|Fumble
+
+  --:Hit|
+  --=Damage|1d8 + @{selected|dexterity_mod} [DEX]
+  --+Damage Roll!|[$Damage] Piercing damage.
+  --^Final|
+  
+  --:Fumble|
+  --+Fumble!|The attack went horribly wrong.
+  --^Final|
+
+  --:Crit|
+  --=Damage|1d8 + @{selected|dexterity_mod} [DEX] + 1d8 [CRIT]
+  --+Critical Hit!|[$Damage] Piercing damage.
+  --:Final|
+
+  --a|Dagger
+
+
+
+}}

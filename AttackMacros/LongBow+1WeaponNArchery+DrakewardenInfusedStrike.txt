@@ -1,0 +1,60 @@
+!scriptcard  {{
+  --#title|Longbow
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+  --#leftsub|Ranged Attack
+  --#rightsub|150/600
+  --#emoteText|@{selected|token_name} takes aim at @{target|token_name} with his longbow
+
+  -->GetAmmoCount|
+
+  --=TargetAC|@{target|npc_ac}
+  --?[$TargetAC.Total] -gt 0|DoneWithAC
+  --=TargetAC|@{target|ac}
+  --:DoneWithAC|
+  --=AttackRoll|?{Attack|Standard,1d20|Advantage,2d20kh1|Disadvantage,2d20kl1} + @{selected|dexterity_mod} [DEX] + @{selected|pb} [PROF] + 1 [Magic Bonus] + 2 [Archery]
+  --@modattr|_silent _charid @{character_id} _other_resource|-1
+  --=Arrows|@{other_resource} -1
+  --+Attack|@{selected|token_name} rolls [$AttackRoll] to Hit @{target|token_name}.
+  --?[$AttackRoll.Base] -eq 20|Crit
+  --?[$AttackRoll.Base] -eq 1|Fumble
+
+  --:Hit|
+  --=Damage|1d8 + @{selected|dexterity_mod} [DEX] + 1 [Magic Bonus]
+  --+Damage Roll!|[$Damage] Piercing damage.
+  --^Final|
+
+  --:Fumble|
+  --+Fumble!|The attack went horribly wrong.
+  --^Final|
+
+  --:Crit|
+  --=Damage|1d8 + @{selected|dexterity_mod} [DEX] + 1d8 [CRIT] + 1 [Magic Bonus]
+  --+Critical Hit!|[$Damage] Piercing damage.
+
+  --:Final|
+  --a|Arrow
+  --+Remaining Arrows|[$Arrows]
+  [rbutton]InfusedStrike::InfusedStrike[/rbutton]
+  --X|
+
+  --:GetAmmoCount|
+  --=Ammo|@{other_resource}
+  --?[$Ammo] -eq 0|NoAmmoLeft
+  --<|
+
+  --:NoAmmoLeft|
+  --+[*S:character_name]| [b]OUT OF ARROWS[/b]
+  --X| 
+
+  --:InfusedStrike|
+  --#title|Infused Strikes
+  --#sourceToken|Draketalon
+  --#targetToken|@{target|token_id}
+  --#leftsub|Reaction
+  --#rightsub|30feet
+  --#emotestate|hidden
+  --=IStrike|1d6
+  --+Infused Strike:|[$IStrike] Lightning Damage
+  --X|
+}}

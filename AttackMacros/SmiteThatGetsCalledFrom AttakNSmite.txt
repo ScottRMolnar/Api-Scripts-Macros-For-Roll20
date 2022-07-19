@@ -1,0 +1,51 @@
+!scriptcard  {{
+  --#title|Smite
+  --#titlecardbackground|#d6d925
+  --#titleFontColor|#730303
+  --#subtitleFontColor|#730303
+  --#leftsub|Slot level [$SlotLevel]
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+  --#emoteText|[*S:character_name] also smites! @{target|token_name}
+
+  -->GetAndCheckSlotInformation|
+
+  --?"@{target|npc_type}" -inc fiend -or "@{target|npc_type}" -inc undead|=UndeadCount;[$UndeadCount] + 1
+	--]|[
+  --=[$UndeadCount]|0
+	--]|
+
+
+  --=SmiteDice|[$SlotLevel]d8 + 1d8 + [$UndeadCount]d8
+  --+Smite|deals [$SmiteDice] radiant damage.
+  -->DeductSpellSlot|
+  --#rightsub|Level [$SlotLevel] Left: [$SlotsRemaining]
+  -->PlayEffects|none;burn-holy;none;none 
+  --X|
+
+
+  --:GetAndCheckSlotInformation|
+  --=SlotLevel|?{Spell Slot Level?|1|2|3|4|5|6|7|8|9}
+  --=SlotsTotal|[*S:lvl[$SlotLevel]_slots_total]
+  --=SlotsExpended|[*S:lvl[$SlotLevel]_slots_expended]
+  --?[$SlotsExpended.Total] -eq 0|NoSlotsLeft
+  --<|
+
+  --:NoSlotsLeft|
+  --+|[*S:character_name] has no level [$SlotLevel.Total] spell slots available.
+  --X|
+
+  --:DeductSpellSlot|
+  --=SlotsExpended|[$SlotsExpended] - 1
+  --@setattr|_charid [*S:character_id] _lvl[$SlotLevel]_slots_expended|[$SlotsExpended] _silent
+  --=SlotsRemaining|[$SlotsExpended]
+  --<|
+
+  --:PlayEffects|Parameters are : source effect; target effect; line effect; sound effect
+  --/vtoken|@{selected|token_id} [%1%]
+  --vtoken|@{target|token_id} [%2%]
+  --/vbetweentokens|@{selected|token_id} @{target|token_id} [%3%]
+  --/@roll20AM|_audio,play,nomenu|[%4%]
+  --<|
+
+}}

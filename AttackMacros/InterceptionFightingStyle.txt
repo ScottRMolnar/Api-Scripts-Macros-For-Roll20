@@ -1,0 +1,9 @@
+!scriptcard  {{
+  --#title|Interception
+  --#sourceToken|@{selected|token_id}
+  --#targetToken|@{target|token_id}
+  --#leftsub|Within 5 feet
+  --#emoteText|@{selected|token_name} uses his halberd to gaurd @{target|token_name}
+  --=Interception|1d10 + @{selected|pb}
+  --+Damaged Blocked|[$Interception]
+}}
